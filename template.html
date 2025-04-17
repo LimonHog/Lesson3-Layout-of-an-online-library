@@ -10,23 +10,30 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    {% for one_book in all_books %}
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="books/{{ one_book['img_src'] }}" class="card-img" alt="обложка книги {{ one_book['title'] }}">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{ one_book['title'] }}</h5>
-              <p class="card-text">{{ one_book['author'] }}</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="container">
+      {% for first_books in two_books_each %}
+        <div class="row">
+          {% for one_book in first_books %}
+            <div class="col">
+              <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img src="books/{{ one_book['img_src'] }}" class="card-img" alt="обложка книги {{ one_book['title'] }}">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ one_book['title'] }}</h5>
+                      <p class="card-text">{{ one_book['author'] }}</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          {% endfor %}
         </div>
-      </div>
-    {% endfor %}
-
+      {% endfor %}
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   </body>
