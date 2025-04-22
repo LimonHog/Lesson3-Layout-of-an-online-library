@@ -26,6 +26,7 @@ def on_reload():
         
         rendered_page = template.render(
             two_books_at_time = two_books_at_time
+ 
         )
         
         with open(f'pages/index{cycle_step}.html', 'w', encoding="utf8") as file:
