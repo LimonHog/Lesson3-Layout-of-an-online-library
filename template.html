@@ -11,14 +11,14 @@
   </head>
   <body>
     <div class="container">
-      {% for first_books in two_books_each %}
+      {% for two_books in two_books_at_time %}
         <div class="row">
-          {% for one_book in first_books %}
+          {% for one_book in two_books %}
             <div class="col">
               <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                   <div class="col-md-4">
-                    <img src="books/{{ one_book['img_src'] }}" class="card-img" alt="обложка книги {{ one_book['title'] }}">
+                    <img src="../books/{{ one_book['img_src'] }}" class="card-img" alt="обложка книги {{ one_book['title'] }}">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">

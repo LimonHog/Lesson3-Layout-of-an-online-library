@@ -2,13 +2,16 @@ import json
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from more_itertools import chunked
+import os
+
 
 def on_reload():
     with open("books/meta_data.json", "r", encoding="utf-8") as my_file:
         all_books_json = my_file.read()
 
     all_books = json.loads(all_books_json)
-    two_books_each = list(chunked(all_books, 2))
+    ten_books_at_time = list(chunked(all_books, 10))
+    
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -16,18 +19,25 @@ def on_reload():
     )
     template = env.get_template('template.html')
 
-    rendered_page = template.render(
-        two_books_each = two_books_each
-    )
-    with open('index.html', 'w', encoding="utf8") as file:
-        file.write(rendered_page)
-
-    # for one in two_books_each:
-    #     for i in one:
-    #         print(i['title'])
 
 
+    for cycle_step, ten_books in enumerate(ten_books_at_time, 1):
+        two_books_at_time = list(chunked(ten_books, 2))
+        
+        rendered_page = template.render(
+            two_books_at_time = two_books_at_time
+        )
+        
+        with open(f'pages/index{cycle_step}.html', 'w', encoding="utf8") as file:
+            file.write(rendered_page)
+
+
+if os.path.isdir('pages') == False:
+    os.makedirs('pages')
 on_reload()
+
+
+
 
 server = Server()
 server.watch('template.html', on_reload)
