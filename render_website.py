@@ -20,13 +20,12 @@ def on_reload():
     template = env.get_template('template.html')
 
 
-
     for cycle_step, ten_books in enumerate(ten_books_at_time, 1):
         two_books_at_time = list(chunked(ten_books, 2))
-        
         rendered_page = template.render(
-            two_books_at_time = two_books_at_time
- 
+            two_books_at_time = two_books_at_time,
+            this_page_num = cycle_step,
+            pages_quanity = len(ten_books_at_time)+1
         )
         
         with open(f'pages/index{cycle_step}.html', 'w', encoding="utf8") as file:
