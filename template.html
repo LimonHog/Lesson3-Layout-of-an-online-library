@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul class="pagination indention mt-4">
           {% if this_page_num == 1 %}
             <li class="page-item disabled"><a class="page-link" tabindex="-1" href="index{{ this_page_num-1 }}.html">Передыдущая</a></li>
           {% else %}
@@ -45,6 +45,11 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ one_book['title'] }}</h5>
                       <p class="card-text">{{ one_book['author'] }}</p>
+                      <p>
+                        {% for genre in one_book['genres'].split(',') %}
+                          <span class="badge badge-light">{{ genre }}</span>
+                        {% endfor %}
+                      </p>
                       <p class="card-text">
                         <small class="text-muted"><a href="../books/{{ one_book['book_path'] }}" target="_blank">Читать</a></small>
                       </p>
