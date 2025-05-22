@@ -6,7 +6,7 @@ import os
 
 
 def on_reload():
-    with open("books/meta_data.json", "r", encoding="utf-8") as my_file:
+    with open("media/meta_data.json", "r", encoding="utf-8") as my_file:
         all_books_json = my_file.read()
 
     all_books = json.loads(all_books_json)
