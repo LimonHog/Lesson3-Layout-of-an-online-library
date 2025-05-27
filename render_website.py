@@ -41,14 +41,17 @@ def on_reload():
             file.write(rendered_page)
 
 
-if os.path.isdir('pages') == False:
-    os.makedirs('pages')
-on_reload()
+def main():
+
+    if os.path.isdir('pages') == False:
+        os.makedirs('pages')
+    on_reload()
 
 
+    server = Server()
+    server.watch('template.html', on_reload)
+    server.serve(root='.', default_filename='pages/index1.html')
 
 
-server = Server()
-server.watch('template.html', on_reload)
-
-server.serve(root='.', default_filename='pages/index1.html')
+if __name__ == '__main__':
+    main()
