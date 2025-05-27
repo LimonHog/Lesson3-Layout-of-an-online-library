@@ -20,7 +20,7 @@ def on_reload():
         all_books_json = my_file.read()
 
     all_books = json.loads(all_books_json)
-    ten_books_at_time = list(chunked(all_books, 10))
+    books_per_page = list(chunked(all_books, 10))
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -29,12 +29,12 @@ def on_reload():
     template = env.get_template('template.html')
 
 
-    for cycle_step, ten_books in enumerate(ten_books_at_time, 1):
-        two_books_at_time = list(chunked(ten_books, 2))
+    for cycle_step, ten_books in enumerate(books_per_page, 1):
+        books_per_line = list(chunked(ten_books, 2))
         rendered_page = template.render(
-            two_books_at_time = two_books_at_time,
+            books_per_line = books_per_line,
             this_page_num = cycle_step,
-            pages_quanity = len(ten_books_at_time)+1
+            pages_quanity = len(books_per_page)+1
         )
         
         with open(f'pages/index{cycle_step}.html', 'w', encoding="utf8") as file:
