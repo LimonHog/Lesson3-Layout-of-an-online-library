@@ -43,8 +43,8 @@ def on_reload():
 
 def main():
 
-    if os.path.isdir('pages') == False:
-        os.makedirs('pages')
+    os.makedirs('pages', exist_ok=True )
+
     on_reload()
 
 
